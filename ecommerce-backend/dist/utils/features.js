@@ -7,14 +7,20 @@ export const connectDB = (uri) => {
     }).then(c => console.log(`DB connecred to ${c.connection.host}`))
         .catch(e => console.log(e));
 };
-export const invalidatesCache = async ({ product, order, admin }) => {
+export const invalidatesCache = async ({ product, order, admin, userId, orderId, productId }) => {
     if (product) {
-        const productKeys = ["latest-products", "categories", "all-products"];
-        const products = await Product.find({}).select("_id");
-        products.forEach(i => {
-            productKeys.push(`product-${i._id}`);
-        });
+        const productKeys = ["latest-products", "categories", "all-products", `product-${productId}`];
+        if (typeof productId === "string") {
+            productKeys.push(`product-${productId}`);
+        }
+        if (typeof productId === "object") {
+            productId.forEach((i) => productKeys.push(`product-${i}`));
+        }
         myCache.del(productKeys);
+    }
+    if (order) {
+        const orderKeys = ["all-orders", `my-orders-${userId}`, `order-${orderId}`];
+        myCache.del(orderKeys);
     }
 };
 export const reduceStock = async (orderItems) => {
