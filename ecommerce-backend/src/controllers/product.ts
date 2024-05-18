@@ -75,25 +75,24 @@ export const getAdminProducts = TryCatch(async (req, res, next) => {
   });
 });
 
-export const getSingleProduct = TryCatch(
-  async (req, res, next) => {
-    const id=req.params.id
-    let product
+export const getSingleProduct = TryCatch(async (req, res, next) => {
+  let product;
+  const id = req.params.id;
+  if (myCache.has(`product-${id}`))
+    product = JSON.parse(myCache.get(`product-${id}`) as string);
+  else {
+    product = await Product.findById(id);
 
-    if(myCache.has(`product-${id}`)) 
-        product=JSON.parse(myCache.get(`product-${id}`) as string);
-    else{
-        const product = await Product.findById(id);
-        if (!product) return next(new ErrorHandler("Product not found", 404));
+    if (!product) return next(new ErrorHandler("Product Not Found", 404));
 
-        myCache.set(`product-${id}`,JSON.stringify(product))
-    }       
-    return res.status(201).json({
-      success: true,
-      product,
-    });
+    myCache.set(`product-${id}`, JSON.stringify(product));
   }
-);
+
+  return res.status(200).json({
+    success: true,
+    product,
+  });
+});
 
 export const newProduct = TryCatch(
     async (req: Request<{}, {}, NewProductRequestBody>, res, next) => {
