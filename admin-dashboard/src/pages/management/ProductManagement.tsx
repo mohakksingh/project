@@ -1,11 +1,11 @@
 import { ChangeEvent, useState } from "react"
 import AdminSidebar from "../../components/AdminSidebar"
 
-const NewProduct = () => {
+const ProductManagement = () => {
 
     const [name,setName]=useState<string>("")
     const [price,setPrice]=useState<number>()
-    const [stock,setStock]=useState<number>()
+    const [stock,setStock]=useState<number>(0)
     const [photo,setPhoto]=useState<string>("")
 
     const changeImageHandler=(e:ChangeEvent<HTMLInputElement>)=>{
@@ -25,6 +25,16 @@ const NewProduct = () => {
     <div className="admin-container">
         <AdminSidebar/>
         <main className="product-management">
+          <section>
+            <strong>ID- asdasdasf</strong>
+            <img src={photo} alt="Product"/>
+            <p>{name}</p>
+            {
+              stock>0?(
+                <span>Available</span>
+              ): <span>Available</span>
+            }
+          </section>
             <article>
                 <form>
                     <h2>New Product</h2>
@@ -59,4 +69,4 @@ const NewProduct = () => {
   )
 }
 
-export default NewProduct
+export default ProductManagement
