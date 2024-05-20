@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,8 +9,11 @@ import {
   ChartData,
   ChartOptions,
   ArcElement,
+  PointElement,
+  LineElement,
+  Filler,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Bar, Doughnut, Line, Pie } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -20,7 +22,10 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ArcElement
+  ArcElement,
+  PointElement,
+  LineElement,
+  Filler
 );
 
 const months = ["January", "February", "March", "April", "May", "June", "July"];
@@ -55,9 +60,9 @@ export const BarChart = ({
       },
       title: {
         display: false,
-        text: "Chart.js Bar Chart",
       },
     },
+
     scales: {
       y: {
         beginAtZero: true,
@@ -95,7 +100,7 @@ export const BarChart = ({
     ],
   };
 
-  return <Bar options={options} data={data} />;
+  return <Bar width={horizontal ? "200%" : ""} options={options} data={data} />;
 };
 
 interface DoughnutChartProps {
@@ -141,5 +146,5 @@ export const DoughnutChart = ({
     cutout,
   };
 
-  return <DoughnutChart data={doughnutData} options={doughnutOptions} />;
+  return <Doughnut data={doughnutData} options={doughnutOptions} />;
 };

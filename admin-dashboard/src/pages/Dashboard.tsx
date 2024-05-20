@@ -77,11 +77,13 @@ const Dashboard = () => {
           <div className="gender-chart">
             <h2>Gender Ratio</h2>
 
-              <DoughnutChart labels={["Female","Male"]} data={[12,19]} backgroundColor={["hsl(340,82%,56%)","rgba(53,162,236,0.8)"]}/>
+              <DoughnutChart labels={["Female","Male"]} data={[12,19]} backgroundColor={["hsl(340,82%,56%)","rgba(53,162,236,0.8)"]}
+              cutout={90}/>
             <p>
               <BiMaleFemale />
             </p>
           </div>
+          
         </section>
       </main>
     </div>
