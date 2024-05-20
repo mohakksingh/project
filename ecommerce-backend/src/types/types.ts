@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
-export interface NewUserReqBody {
+export interface NewUserRequestBody {
   name: string;
   email: string;
   photo: string;
@@ -33,11 +33,9 @@ export type SearchRequestQuery = {
 export interface BaseQuery {
   name?: {
     $regex: string;
-    $options: "i";
+    $options: string;
   };
-  price?: {
-    $lte: number;
-  };
+  price?: { $lte: number };
   category?: string;
 }
 
@@ -45,34 +43,34 @@ export type InvalidateCacheProps = {
   product?: boolean;
   order?: boolean;
   admin?: boolean;
-  userId?:string;
-  orderId?:string;
-  productId?:string | string[];
+  userId?: string;
+  orderId?: string;
+  productId?: string | string[];
 };
 
-export type OrderItemType={
-    name:string;
-    photo:string;
-    price:number;
-    quantity:number;
-    productId:string;
-}
+export type OrderItemType = {
+  name: string;
+  photo: string;
+  price: number;
+  quantity: number;
+  productId: string;
+};
 
-export type ShippingInfoType={
-    address:string;
-    city:string;
-    state:string;
-    country:string;
-    pinCode:number;
-}
+export type ShippingInfoType = {
+  address: string;
+  city: string;
+  state: string;
+  country: string;
+  pinCode: number;
+};
 
-export interface NewOrderRequestBody{
-  shippingInfo:ShippingInfoType;
-  user:string;
-  subtotal:number;
-  tax:number;
-  shippingCharges:number;
-  discount:number;
-  total:number;
-  orderItems:OrderItemType[];
+export interface NewOrderRequestBody {
+  shippingInfo: ShippingInfoType;
+  user: string;
+  subtotal: number;
+  tax: number;
+  shippingCharges: number;
+  discount: number;
+  total: number;
+  orderItems: OrderItemType[];
 }
