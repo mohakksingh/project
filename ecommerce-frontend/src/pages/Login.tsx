@@ -1,11 +1,33 @@
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useState } from "react"
+import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
+import { auth } from "../firebase";
+import { useLoginMutation } from "../redux/api/userAPI";
 
 
 const Login = () => {
 
     const [gender,setGender]=useState("");
     const [date,setDate]=useState("")
+
+    const {login} =useLoginMutation()
+
+    const loginHandler=async()=>{
+        try{
+            const provider=new GoogleAuthProvider();
+            const {user}=await signInWithPopup(auth,provider);
+            
+            await login({
+                
+            })
+            
+
+        }catch(e){
+            toast.error("Sign In Failed")
+        }
+    }
+
   return (
     <div className="login">
         <main>
@@ -24,7 +46,7 @@ const Login = () => {
             </div>
             <div>
                 <p>Already Signed In Once</p>
-                <button><FcGoogle/> <span>Sign in with Google</span></button>
+                <button onClick={loginHandler}><FcGoogle/> <span>Sign in with Google</span></button>
             </div>
         </main>
     </div>
