@@ -6,8 +6,11 @@ const Search = lazy(() => import("./pages/Search"));
 const Cart = lazy(() => import("./pages/Cart"));
 const Shipping = lazy(() => import("./pages/Shipping"));
 const Login = lazy(() => import("./pages/Login"));
+const Orders = lazy(() => import("./pages/Orders"));
+const OrderDetails = lazy(() => import("./pages/OrderDetails"));
 import Loader from "./components/loader";
 import { Header } from "./components/Header";
+
 
 //admin-styles
 
@@ -74,6 +77,8 @@ const App = () => {
           {/* Logged In user Routes */}
           <Route>
             <Route path="/shipping" element={<Shipping />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/order/:id" element={<OrderDetails />} />
           </Route>
           {/* Admin Routes */}
           <Route
