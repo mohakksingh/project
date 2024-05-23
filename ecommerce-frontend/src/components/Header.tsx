@@ -7,10 +7,12 @@ import {
   FaUser,
 } from "react-icons/fa";
 import { useState } from "react";
+import { User } from "../types/types";
+interface PropsType{
+  user:User | null;
+}
 
-const user = { _id: "", role: "" };
-
-export const Header = () => {
+export const Header = ({user}:PropsType) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const logoutHandler = () => {
