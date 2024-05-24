@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom"
 import ProductCard from "../components/Product-card"
+import { useLatestProductsQuery } from "../redux/api/productAPI"
 
 const Home = () => {
+
+  const {data} = useLatestProductsQuery("")
 
   const addToCardHandler=()=>{
 
@@ -14,7 +17,19 @@ const Home = () => {
       </h1>
 
       <main>
-        <ProductCard productId="esklfjsf" name="Macbook" price={344} stock={32}  handler={addToCardHandler} photo="https://m.media-amazon.com/images/I/71TPda7cwUL._SX522_.jpg"/>
+        {
+          data?.products.map(i=>(
+            <ProductCard 
+            key={i._id}
+              productId={i._id}
+              name={i.name}
+              price={i.price}
+              stock={i.stock}
+              handler={addToCardHandler}
+              photo={i.photo}
+            />
+          ))
+        }
       </main>
     </div>
   )
