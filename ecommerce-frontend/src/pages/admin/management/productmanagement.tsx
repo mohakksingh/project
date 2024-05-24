@@ -1,11 +1,24 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import AdminSidebar from "../../../components/admin/AdminSidebar.tsx";
+import { useSelector } from "react-redux";
+import { UserReducerInitialState } from "../../../types/reducer-types.ts";
+import { useProductDetailsQuery } from "../../../redux/api/productAPI.ts";
+import { useParams } from "react-router-dom";
 
 const img =
   "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8&w=1000&q=804";
 
 const Productmanagement = () => {
+
+  const {user}=useSelector(
+    (state:{userReducer:UserReducerInitialState})=>state.userReducer
+  )
+
+  const params=useParams()
+
+  const {data} = useProductDetailsQuery(params.id!)
+
   const [price, setPrice] = useState<number>(2000);
   const [stock, setStock] = useState<number>(10);
   const [name, setName] = useState<string>("Puma Shoes");
