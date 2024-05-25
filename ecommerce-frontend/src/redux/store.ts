@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { productAPI } from "./api/productAPI";
 import { userAPI } from "./api/userAPI";
-import { userReducer } from "./reducer/userReducer";
 import { cartReducer } from "./reducer/cartReducer";
+import { userReducer } from "./reducer/userReducer";
 
 export const server = import.meta.env.VITE_SERVER;
 
@@ -13,5 +13,6 @@ export const store = configureStore({
     [userReducer.name]: userReducer.reducer,
     [cartReducer.name]: cartReducer.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(userAPI.middleware, productAPI.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().prepend(userAPI.middleware, productAPI.middleware),
 });
