@@ -107,7 +107,7 @@ export const updateProduct = TryCatch(async (req, res, next) => {
     if (stock)
         product.stock = stock;
     if (category)
-        product.category = category;
+        product.category = category.toLowerCase();
     await product.save();
     invalidateCache({
         product: true,
