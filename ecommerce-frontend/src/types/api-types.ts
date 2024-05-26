@@ -1,4 +1,4 @@
-import { CartItem, Order, Product, ShippingInfo, User } from "./types";
+import { CartItem, Order, Pie, Product, ShippingInfo, Stats, User } from "./types";
 
 export type CustomError={
     status:number;
@@ -12,6 +12,10 @@ export type MessageResponse={
     success:boolean;
     message:string;
 }
+export type AllUsersResponse={
+    success:boolean;
+    users:User[];
+}
 
 export type UserResponse={
     success:boolean;
@@ -22,6 +26,16 @@ export type AllProductsResponse={
     success:boolean;
     products:Product[];
 }
+
+export type AllOrdersResponse={
+    success:boolean;
+    orders:Order[];
+}
+export type OrderDetailsReponse={
+    success:boolean;
+    order:Order;
+}
+
 export type CategoriesResponse={
     success:boolean;
     categories:string[];
@@ -29,6 +43,22 @@ export type CategoriesResponse={
 
 export type SearchProductsResponse=AllProductsResponse &{
     totalPage:number;
+}
+
+
+export type ProductResponse={
+    success:boolean;
+    product:Product;
+}
+
+
+export type StatsResponse={
+    success:boolean;
+    stats:Stats;
+}
+export type PieResponse={
+    success:boolean;
+    charts:Pie;
 }
 
 export type SearchProductsRequest= {
@@ -39,10 +69,6 @@ export type SearchProductsRequest= {
     sort:string;
 }
 
-export type ProductResponse={
-    success:boolean;
-    product:Product;
-}
 
 export type NewProductRequest={
     id:string;
@@ -73,11 +99,8 @@ export type UpdateOrderRequest={
     orderId:string;
 }
 
-export type AllOrdersResponse={
-    success:boolean;
-    orders:Order[];
+export type DeleteUserRequest={
+    userId:string;
+    adminUserId:string;
 }
-export type OrderDetailsReponse={
-    success:boolean;
-    order:Order;
-}
+

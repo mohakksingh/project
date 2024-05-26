@@ -10,6 +10,8 @@ const Login = lazy(() => import("./pages/Login"));
 const Orders = lazy(() => import("./pages/Orders"));
 const OrderDetails = lazy(() => import("./pages/OrderDetails"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const Checkout= lazy(()=>import("./pages/Checkout"))
+
 import Loader from "./components/loader";
 import { Header } from "./components/Header";
 import { onAuthStateChanged } from "firebase/auth";
@@ -106,6 +108,7 @@ const App = () => {
             <Route path="/shipping" element={<Shipping />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/order/:id" element={<OrderDetails />} />
+            <Route path="/pay" element={<Checkout />} />
           </Route>
           {/* Admin Routes */}
           <Route
