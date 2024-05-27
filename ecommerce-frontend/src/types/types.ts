@@ -116,5 +116,17 @@ type CountAndChange = {
       customer:number;
     },
   };
+  
+  export type Bar = {
+    users:number[];
+    products:number[];
+    orders:number[];
+  };
+  export type Line = {
+    users:number[];
+    products:number[];
+    discount:number[];
+    revenue:number[];
+  };
 
   

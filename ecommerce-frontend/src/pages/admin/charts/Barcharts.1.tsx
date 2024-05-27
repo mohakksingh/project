@@ -3,24 +3,12 @@ import AdminSidebar from "../../../components/admin/AdminSidebar.tsx";
 import { BarChart } from "../../../components/admin/Charts.tsx";
 import { RootState } from "../../../redux/store.ts";
 import { useBarQuery } from "../../../redux/api/dashboardAPI.ts";
-import toast from "react-hot-toast";
-import { CustomError } from "../../../types/api-types.ts";
-import { Skeleton } from "../../../components/loader.tsx";
-import { getLastMonths } from "../../../utils/features.ts";
+import { months } from "./barcharts.tsx";
 
-
-const {last12Months,last6Months} =getLastMonths();
-
-const Barcharts = () => {
-
+export const Barcharts = () => {
   const { user } = useSelector((state: RootState) => state.userReducer);
 
-  const { isLoading, data, error, isError } = useBarQuery(user?._id!); 
-
-  const products=data?.charts.products || [];
-  const orders=data?.charts.orders || [];
-  const users=data?.charts.users || [];
-  
+  const { isLoading, data, error, isError } = useBarQuery(user?._id!);
 
   if (isError) {
     const err = error as CustomError;
@@ -32,13 +20,10 @@ const Barcharts = () => {
       <AdminSidebar />
       <main className="chart-container">
         <h1>Bar Charts</h1>
-        {
-          isLoading? <Skeleton length={20} />: <>
-            <section>
+        <section>
           <BarChart
-            data_1={products}
-            data_2={users}
-            labels={last6Months}
+            data_2={[300, 144, 433, 655, 237, 755, 190]}
+            data_1={[200, 444, 343, 556, 778, 455, 990]}
             title_1="Products"
             title_2="Users"
             bgColor_1={`hsl(260, 50%, 30%)`}
@@ -50,21 +35,19 @@ const Barcharts = () => {
         <section>
           <BarChart
             horizontal={true}
-            data_1={orders}
+            data_1={[
+              200, 444, 343, 556, 778, 455, 990, 444, 122, 334, 890, 909,
+            ]}
             data_2={[]}
             title_1="Orders"
             title_2=""
             bgColor_1={`hsl(180, 40%, 50%)`}
             bgColor_2=""
-            labels={last12Months}
+            labels={months}
           />
           <h2>Orders throughout the year</h2>
         </section>
-          </>
-        }
       </main>
     </div>
   );
 };
-
-export default Barcharts;
