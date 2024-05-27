@@ -6,7 +6,7 @@ export const connectDB = (uri) => {
         .connect(uri, {
         dbName: "Ecommerce_24",
     })
-        .then((c) => console.log(`DB Connected to ${c.connection.host}`))
+        .then((c) => console.log(`DB Connected `))
         .catch((e) => console.log(e));
 };
 export const invalidateCache = ({ product, order, admin, userId, orderId, productId, }) => {

@@ -18,8 +18,6 @@ const PieCharts = () => {
   const ageGroup = data?.charts.usersAgeGroup!;
   const adminCustomer = data?.charts.adminCustomer!;
 
-  console.log(categories);
-  
 
   if (isError) {
     return <Navigate to={"/admin/dashboard"}></Navigate>;
