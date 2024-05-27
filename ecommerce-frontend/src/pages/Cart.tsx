@@ -87,14 +87,14 @@ const Cart = () => {
         )}
       </main>
       <aside>
-        <p>Subtotal: ${subtotal}</p>
-        <p>ShippingCharges: ${shippingCharges}</p>
-        <p>Tax: ${tax}</p>
+        <p>Subtotal: ₹{subtotal}</p>
+        <p>ShippingCharges: ₹{shippingCharges}</p>
+        <p>Tax: ₹{tax}</p>
         <p>
-          Discount: <em className="red">- ${discount}</em>
+          Discount: <em className="red">- ₹{discount}</em>
         </p>
         <p>
-          <b>Total:${total}</b>
+          <b>Total:₹{total}</b>
         </p>
         <input
           type="text"
@@ -105,7 +105,7 @@ const Cart = () => {
         {couponCode &&
           (isValidCouponCode ? (
             <span className="green">
-              ${discount} off using the <code>{couponCode}</code>
+              ₹{discount} off using the <code>{couponCode}</code>
             </span>
           ) : (
             <span className="red">

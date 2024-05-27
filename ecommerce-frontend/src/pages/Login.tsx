@@ -27,12 +27,12 @@ const Login = () => {
         dob:date,
         _id:user.uid
       });
-      if("data" in res){
+      if (res.data) {
         toast.success(res.data.message);
-      }else{
-        const error=res.error as FetchBaseQueryError;
-        const message=(error.data as MessageResponse).message;
-        toast.error(message)
+      } else {
+        const error = res.error as FetchBaseQueryError;
+        const message = (error.data as MessageResponse).message;
+        toast.error(message);
       }
     } catch (e) {
       toast.error("Sign In Failed");

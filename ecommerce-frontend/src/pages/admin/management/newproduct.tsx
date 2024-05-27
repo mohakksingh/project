@@ -1,10 +1,10 @@
-import { ChangeEvent, FormEvent, FormEventHandler, useState } from "react";
-import AdminSidebar from "../../../components/admin/AdminSidebar.tsx";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { useSelector } from "react-redux";
-import { UserReducerInitialState } from "../../../types/reducer-types.ts";
-import { useNewProductMutation } from "../../../redux/api/productAPI.ts";
-import { responseToast } from "../../../utils/features.ts";
 import { useNavigate } from "react-router-dom";
+import AdminSidebar from "../../../components/admin/AdminSidebar.tsx";
+import { useNewProductMutation } from "../../../redux/api/productAPI.ts";
+import { UserReducerInitialState } from "../../../types/reducer-types.ts";
+import { responseToast } from "../../../utils/features.ts";
 
 const NewProduct = () => {
   const { user } = useSelector(
@@ -19,7 +19,7 @@ const NewProduct = () => {
   const [photo, setPhoto] = useState<File>();
 
   const [newProduct] = useNewProductMutation();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   const changeImageHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const file: File | undefined = e.target.files?.[0];
@@ -37,23 +37,23 @@ const NewProduct = () => {
     }
   };
 
-  const submitHandler =async (e:FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if(!name || !price || stock <0 || !category || !photo) return;
+    if (!name || !price || stock < 0 || !category || !photo) return;
 
-    const formData=new FormData();
+    const formData = new FormData();
 
-    formData.set("name",name);
-    formData.set("price",price.toString());
-    formData.set("stock",stock.toString());
-    formData.set("photo",photo);
-    formData.set("category",category);
+    formData.set("name", name);
+    formData.set("price", price.toString());
+    formData.set("stock", stock.toString());
+    formData.set("photo", photo);
+    formData.set("category", category);
 
-    const res=await newProduct({
-      id:user?._id!,
-      formData
-    })
+    const res = await newProduct({
+      id: user?._id!,
+      formData,
+    });
 
     responseToast(res, navigate, "/admin/product");
   };

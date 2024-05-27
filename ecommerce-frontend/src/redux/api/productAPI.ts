@@ -9,16 +9,20 @@ export const productAPI = createApi({
     latestProducts: builder.query<AllProductsResponse,string>({query:()=>"latest",providesTags:["product"]}),
     allProducts: builder.query<AllProductsResponse,string>({query:(id)=>`admin-products?id=${id}`,providesTags:["product"]}),
     categories: builder.query<CategoriesResponse,string>({query:()=>`categories`,providesTags:["product"]}),
-    searchProducts: builder.query<SearchProductsResponse,SearchProductsRequest>({query:({price,search,sort,category,page})=>{
+    searchProducts: builder.query<
+      SearchProductsResponse,
+      SearchProductsRequest
+    >({
+      query: ({ price, search, sort, category, page }) => {
+        let base = `all?search=${search}&page=${page}`;
 
-      let base= `all?search=${search}&page=${page}`;
+        if (price) base += `&price=${price}`;
+        if (sort) base += `&sort=${sort}`;
+        if (category) base += `&category=${category}`;
 
-      if(price) base += `&price=${price}`;
-      if(sort) base += `&price=${sort}`;
-      if(category) base += `&price=${category}`;
-
-      return base
-    },providesTags:["product"]
+        return base;
+      },
+      providesTags: ["product"],
     }),
     productDetails: builder.query<ProductResponse,string>({query:(id)=>id,providesTags:["product"]}),
     newProduct: builder.mutation<MessageResponse,NewProductRequest>({query:({formData,id})=>({

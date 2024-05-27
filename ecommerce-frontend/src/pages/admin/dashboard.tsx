@@ -10,7 +10,7 @@ import Table from "../../components/admin/DashboardTable";
 import { Skeleton } from "../../components/loader";
 import { useStatsQuery } from "../../redux/api/dashboardAPI";
 import { RootState } from "../../redux/store";
-import { getLastMonths } from "../../utils/features";
+import { getLastMonths } from "../../utils/features"; 
 
 const userImg =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJxA5cTf-5dh5Eusm0puHbvAhOrCRPtckzjA&usqp";

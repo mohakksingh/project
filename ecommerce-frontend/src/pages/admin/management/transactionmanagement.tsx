@@ -4,7 +4,11 @@ import AdminSidebar from "../../../components/admin/AdminSidebar.tsx";
 
 import { useSelector } from "react-redux";
 import { Skeleton } from "../../../components/loader.tsx";
-import { useDeleteOrderMutation, useOrderDetailsQuery, useUpdateOrderMutation } from "../../../redux/api/orderAPI.ts";
+import {
+  useDeleteOrderMutation,
+  useOrderDetailsQuery,
+  useUpdateOrderMutation,
+} from "../../../redux/api/orderAPI.ts";
 import { server } from "../../../redux/store";
 import { UserReducerInitialState } from "../../../types/reducer-types.ts";
 import { Order, OrderItem } from "../../../types/types.ts";
@@ -40,7 +44,7 @@ const TransactionManagement = () => {
   const params = useParams();
   const navigate = useNavigate();
 
-  const { isLoading, data, isError, error } = useOrderDetailsQuery(params.id!);
+  const { isLoading, data, isError } = useOrderDetailsQuery(params.id!);
 
   const {
     shippingInfo: { address, city, state, country, pinCode },
@@ -54,22 +58,24 @@ const TransactionManagement = () => {
     shippingCharges,
   } = data?.order || defaultData;
 
-  const [updateOrder] =useUpdateOrderMutation()
-  const [deleteOrder] =useDeleteOrderMutation()
+  const [updateOrder] = useUpdateOrderMutation();
+  const [deleteOrder] = useDeleteOrderMutation();
 
-  const updateHandler = async() => {
-    const res=await updateOrder({
-      userId:user?._id!,
-      orderId:data?.order._id!,
-    })
-    responseToast(res,navigate,"/admin/transaction")
+  const updateHandler = async () => {
+    const res = await updateOrder({
+      userId: user?._id!,
+      orderId: data?.order._id!,
+    });
+    responseToast(res, navigate, "/admin/transaction");
   };
 
-  const deleteHandler = async() => {const res=await deleteOrder({
-    userId:user?._id!,
-    orderId:data?.order._id!,
-  })
-  responseToast(res,navigate,"/admin/transaction")};
+  const deleteHandler = async () => {
+    const res = await deleteOrder({
+      userId: user?._id!,
+      orderId: data?.order._id!,
+    });
+    responseToast(res, navigate, "/admin/transaction");
+  };
 
   if (isError) {
     return <Navigate to={"/404"} />;

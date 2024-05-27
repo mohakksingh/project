@@ -193,19 +193,19 @@ export const getAllProducts = TryCatch(
         $lte: Number(price),
       };
 
-    if (category) baseQuery.category = category;
+      if (category) baseQuery.category = category;
 
-    const productsPromise = Product.find(baseQuery)
-      .sort(sort && { price: sort === "asc" ? 1 : -1 })
-      .limit(limit)
-      .skip(skip);
-
-    const [products, filteredOnlyProduct] = await Promise.all([
-      productsPromise,
-      Product.find(baseQuery),
-    ]);
-
-    const totalPage = Math.ceil(filteredOnlyProduct.length / limit);
+      const productsPromise = Product.find(baseQuery)
+        .sort(sort && { price: sort === "asc" ? 1 : -1 })
+        .limit(limit)
+        .skip(skip);
+  
+      const [products, filteredOnlyProduct] = await Promise.all([
+        productsPromise,
+        Product.find(baseQuery),
+      ]);
+  
+      const totalPage = Math.ceil(filteredOnlyProduct.length / limit);
 
     return res.status(200).json({
       success: true,

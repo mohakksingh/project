@@ -1,15 +1,14 @@
 import { ReactElement, useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Column } from "react-table";
 import AdminSidebar from "../../components/admin/AdminSidebar.tsx";
 import TableHOC from "../../components/admin/TableHOC.tsx";
-import { useSelector } from "react-redux";
-import { UserReducerInitialState } from "../../types/reducer-types.ts";
-import { useAllOrdersQuery } from "../../redux/api/orderAPI.ts";
-import { CustomError } from "../../types/api-types.ts";
-import toast from "react-hot-toast";
 import { Skeleton } from "../../components/loader.tsx";
+import { useAllOrdersQuery } from "../../redux/api/orderAPI.ts";
 import { RootState } from "../../redux/store.ts";
+import { CustomError } from "../../types/api-types.ts";
 
 interface DataType {
   user: string;
@@ -19,7 +18,6 @@ interface DataType {
   status: ReactElement;
   action: ReactElement;
 }
-
 
 const columns: Column<DataType>[] = [
   {
@@ -49,7 +47,7 @@ const columns: Column<DataType>[] = [
 ];
 
 const Transaction = () => {
-  const {user} = useSelector((state:RootState)=>state.userReducer)
+  const { user } = useSelector((state: RootState) => state.userReducer);
 
   const { isLoading, data, isError, error } = useAllOrdersQuery(user?._id!);
 
@@ -84,7 +82,6 @@ const Transaction = () => {
           action: <Link to={`/admin/transaction/${i._id}`}>Manage</Link>,
         }))
       );
-
   }, [data]);
 
   const Table = TableHOC<DataType>(
@@ -97,7 +94,7 @@ const Transaction = () => {
   return (
     <div className="admin-container">
       <AdminSidebar />
-      <main>{isLoading? <Skeleton length={20} /> : Table}</main>
+      <main>{isLoading ? <Skeleton length={20} /> : Table}</main>
     </div>
   );
 };
