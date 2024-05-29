@@ -4,7 +4,7 @@
 
     .back-btn{
         @include square(2.5rem);
-        background-color: $color2;
+        background-color: $color5;
         color: $color1;
         @include flex;
         position: fixed;
@@ -44,13 +44,13 @@
         }
 
         >button{
-            @include btn(1rem,$color3,$color1);
+            @include btn(1rem,$color5,$color1);
             border-radius: 5px;
             font-size: 1.05rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             &:hover{
-                opacity: 0.8;
+                opacity: 0.9;
             }
         }
     }

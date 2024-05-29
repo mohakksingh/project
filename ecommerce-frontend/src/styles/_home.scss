@@ -1,6 +1,6 @@
 :root {
   --padding-home: 2rem 5%;
-  --section-height: 18.75rem;
+  --section-height: 22.75rem;
   --product-card-width: 18.75rem;
   --product-card-height: 25rem;
   --product-card-padding: 1rem;
@@ -19,6 +19,8 @@
   --hover-rotate-deg: 10deg;
   --text-color: #333;
 }
+
+@import 'path/to/_variables.scss'; 
 
 * {
   box-sizing: border-box;
@@ -43,7 +45,7 @@ body {
     width: 100%;
     height: var(--section-height);
     margin: auto;
-    background: url("../assets/cover.jpg") no-repeat center / cover;
+    background: url("../assets/cover.png") no-repeat center / cover;
     border-radius: 0.5rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
@@ -151,6 +153,90 @@ body {
       &:hover {
         transform: rotate(var(--hover-rotate-deg));
       }
+    }
+  }
+}
+
+
+.footer {
+  background-color: $color5;
+  color: #333;
+  padding: 20px 0;
+  text-align: center;
+
+  .footer-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+
+    @media(min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-around;
+    }
+
+    .logo {
+      margin-bottom: 20px;
+      color:#fff;
+
+      h2 {
+        margin: 0;
+      }
+      p {
+        margin: 0;
+        font-size: 14px;
+      }
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      .links-column {
+        margin: 10px;
+
+        @media(min-width: 768px) {
+          margin: 0 20px;
+        }
+
+        a {
+          display: block;
+          color: #ccc;
+          text-decoration: none;
+          margin-bottom: 10px;
+
+          &:hover {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    border-top: 1px solid #fff;
+    padding-top: 20px;
+
+    .social-icons {
+      margin-bottom: 10px;
+
+      a {
+        color: #fff;
+        margin: 0 5px;
+        text-decoration: none;
+        font-size: 18px;
+
+        &:hover {
+          color: #ccc;
+        }
+      }
+    }
+
+    p {
+      margin: 0;
+      font-size: 14px;
+      color: #fff;
     }
   }
 }

@@ -6,6 +6,7 @@ import { Skeleton } from "../components/loader";
 import { CartItem } from "../types/types";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/reducer/cartReducer";
+import Footer from "../components/Footer";
 
 const Home = () => {
   const { data, isLoading, isError } = useLatestProductsQuery("");
@@ -21,6 +22,7 @@ const Home = () => {
 
   if (isError) toast.error("Cannot fetch the products");
   return (
+    <>
     <div className="home">
       <section></section>
       <h1>
@@ -47,7 +49,9 @@ const Home = () => {
           ))
         )}
       </main>
-    </div>
+    </div> 
+    <Footer /> 
+    </> 
   );
 };
 
