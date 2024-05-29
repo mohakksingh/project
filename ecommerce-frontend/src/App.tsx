@@ -2,7 +2,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { Suspense, lazy, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes, useLocation } from "react-router-dom";
 import { Header } from "./components/Header";
 import Loader from "./components/loader";
 import ProtectedRoute from "./components/Protected-Route";
@@ -46,6 +46,7 @@ const App = () => {
   );
 
   const dispatch = useDispatch();
+  const location = useLocation();
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
@@ -54,14 +55,14 @@ const App = () => {
         dispatch(userExist(data.user));
       } else dispatch(userNotExist());
     });
-  }, []);
+  }, [dispatch]);
 
   return loading ? (
     <Loader />
   ) : (
-    <Router>
-      {/* Header */}
-      <Header user={user} />
+    <div>
+      {/* Conditionally render Header based on the current pathname */}
+      {location.pathname !== "/login" && <Header user={user} />}
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -107,24 +108,26 @@ const App = () => {
             <Route path="/admin/app/coupon" element={<Coupon />} />
             <Route path="/admin/app/stopwatch" element={<Stopwatch />} />
             <Route path="/admin/app/toss" element={<Toss />} />
-
             {/* Management */}
             <Route path="/admin/product/new" element={<NewProduct />} />
-
             <Route path="/admin/product/:id" element={<ProductManagement />} />
-
             <Route
               path="/admin/transaction/:id"
               element={<TransactionManagement />}
             />
           </Route>
-
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
       <Toaster position="bottom-center" />
-    </Router>
+    </div>
   );
 };
 
-export default App;
+const AppWrapper = () => (
+  <Router>
+    <App />
+  </Router>
+);
+
+export default AppWrapper;
